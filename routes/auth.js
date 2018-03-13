@@ -4,10 +4,24 @@ const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const router = vertex.router()
 
 router.post('/register', function(req, res) {
-    res.json({
-		confirmation: 'success',
-		data: req.body
+    turbo.createUser(req.body)
+    .then(data => {
+    	res.json({
+    		confirmation: '',
+    		data: data  //NOTE: NOT "user: user"
+    	})
     })
+    .catch(err => {
+    	res.json({
+    		confirmation: 'fail',
+    		message: err.message
+    	})
+    })
+
+  //   res.json({
+		// confirmation: 'success',
+		// data: req.body
+  //   })
 })
 
 module.exports = router
