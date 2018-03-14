@@ -37,28 +37,31 @@ router.post('/login', function(req, res) {
 })
 
 router.get('/currentuser', (req, res) => {
-    if(req.vertexSession.user) {
-        // res.json({
-        //     confirmation: 'user logged in'
-        // })
-        turbo.fetchUser(req.vertexSession.user.id)
-        .then(data => {
-            res.json({
-                confirmation: 'user logged',
-                data: data
-            })
-        })
-        .catch(err => {
-            res.json({
-                confirmation: 'fail',
-                message: err.message
-            })
-        })
-    } else {
+
+    //no one logged in
+    if(req.vertexSession == null) {
         res.json({
-            confirmation: 'user not logged in'
-        })
+            confirmation: 'success',
+            user: null
+        }) 
+        return  
     }
+     
+    //no one logged in
+    if(req.vertexSession.user == null) {
+        res.json({
+            confirmation: 'success',
+            user: null
+        }) 
+        return  
+    }
+
+    //Someone logged in!
+    res.json({
+        confirmation: 'success',
+        user: req.vertexSession.user
+    })
 })
 
 module.exports = router
+
