@@ -22,6 +22,7 @@ router.post('/register', function(req, res) {
 router.post('/login', function(req, res) {
     turbo.login(req.body)
     .then(data => {
+        req.vertexSession.user = {id: data.id}
         res.json({
             confirmation: '',
             data: data  //NOTE: NOT "user: user"
@@ -33,6 +34,31 @@ router.post('/login', function(req, res) {
             message: err.message
         })
     })
+})
+
+router.get('/currentuser', (req, res) => {
+    if(req.vertexSession.user) {
+        // res.json({
+        //     confirmation: 'user logged in'
+        // })
+        turbo.fetchUser(req.vertexSession.user.id)
+        .then(data => {
+            res.json({
+                confirmation: 'user logged',
+                data: data
+            })
+        })
+        .catch(err => {
+            res.json({
+                confirmation: 'fail',
+                message: err.message
+            })
+        })
+    } else {
+        res.json({
+            confirmation: 'user not logged in'
+        })
+    }
 })
 
 module.exports = router
