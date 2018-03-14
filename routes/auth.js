@@ -17,11 +17,22 @@ router.post('/register', function(req, res) {
     		message: err.message
     	})
     })
+})
 
-  //   res.json({
-		// confirmation: 'success',
-		// data: req.body
-  //   })
+router.post('/login', function(req, res) {
+    turbo.login(req.body)
+    .then(data => {
+        res.json({
+            confirmation: '',
+            data: data  //NOTE: NOT "user: user"
+        })
+    })
+    .catch(err => {
+        res.json({
+            confirmation: 'fail',
+            message: err.message
+        })
+    })
 })
 
 module.exports = router
