@@ -10,21 +10,8 @@ router.get('/', (req, res) => {
 	res.render('index', null)
 })
 
-// router.post('/auth', function(req, res) {
-// 	let user = req.body
-// 	turbo.createUser(user)
-// 	.then(data => {
-// 		res.json({
-// 			confirmation: 'success',
-//             user: user
-// 		})
-// 	})
-// 	.catch(err => {
-//         res.json({
-//         	confirmation: 'fail',
-//         	message: err.message
-//         })
-// 	})
-// })
+router.get('/rooms', (req, res) => {
+	res.render('rooms', null)
+})
 
 module.exports = router
