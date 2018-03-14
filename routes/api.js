@@ -63,4 +63,31 @@ router.get('/:resource', (req, res) => {
     })
 })
 
+router.get('/:resource/:id', (req, res) => {
+    const resource = req.params.resource
+    // const id = req.params.id
+
+    if (resources.indexOf(resource) == -1){ //invalid resource
+        res.json({
+            confirmation: 'fail',
+            message: 'invalid source: ' + resource
+        })
+        return
+    }
+
+    turbo.fetchOne(resource, req.params.id)
+    .then(data => {
+        res.json({
+            confirmation: 'success',
+            data: data
+        })
+    })
+    .catch(err => {
+        res.json({
+            confirmation: 'fail',
+            message: err.message
+        })
+    })        
+})
+
 module.exports = router
