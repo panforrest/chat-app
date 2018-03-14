@@ -4,8 +4,10 @@ const vertex = require('vertex360')({site_id: process.env.TURBO_APP_ID})
 const router = vertex.router()
 
 router.post('/register', function(req, res) {
+    // req.vertexSession.user = {id: data.id}
     turbo.createUser(req.body)
     .then(data => {
+        req.vertexSession.user = {id: data.id}
     	res.json({
     		confirmation: '',
     		data: data  //NOTE: NOT "user: user"
@@ -69,6 +71,14 @@ router.get('/currentuser', (req, res) => {
             confirmation: 'fail',
             message: err.message
         })
+    })
+})
+
+router.get('/logout', (req, res) => {
+    req.vertexSession.reset()  //req.vertexSession.user.id
+    res.json({
+        confirmation: 'success',
+        message: 'LOGOUT'
     })
 })
 
