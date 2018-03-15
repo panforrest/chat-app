@@ -15,7 +15,7 @@ router.get('/rooms', (req, res) => {
 })
 
 router.get('/room', (req, res) => {
-	res.render('room', null)
+	res.render('room', {room: '12345'})
 })
 
 module.exports = router
