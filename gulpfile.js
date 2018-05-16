@@ -50,31 +50,17 @@ gulp.task('css-vendor', function(){
         .pipe(gulp.dest('./public/dist/css/'))
 })
 
-gulp.task('style', ['css-main', 'css-vendor', 'copy-fonts'], function(){})
+// gulp.task('style', ['css-main', 'css-vendor', 'copy-fonts'], function(){})
 
 gulp.task('js-vendor', function(){
     return gulp.src(
             [
-                './public/vendor/jquery/jquery-3.2.1.min.js',
-                './public/vendor/wow/wow.min.js',
-                './public/vendor/animsition/dist/js/animsition.min.js',
-                './public/vendor/bootstrap/js/popper.min.js',
-                './public/vendor/bootstrap/js/bootstrap.min.js',
-                './public/vendor/revolution/js/jquery.themepunch.tools.min.js',
-                './public/vendor/revolution/js/jquery.themepunch.revolution.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.video.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.carousel.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.slideanims.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.actions.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.layeranimation.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.kenburn.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.navigation.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.migration.min.js',
-                './public/vendor/revolution/js/extensions/revolution.extension.parallax.min.js',
-                './public/js/slide-custom.js',
-                './public/vendor/select2/select2.min.js',
-                './public/vendor/daterangepicker-bootstrap/moment.min.js',
-                './public/vendor/daterangepicker-bootstrap/daterangepicker.js'
+                './public/js/jquery.min.js',  
+                './public/js/popper.min.js', 
+                './public/js/bootstrap.min.js', 
+                './public/js/metisMenu.min.js', 
+                './public/js/waves.js', 
+                './public/js/jquery.slimscroll.js',     
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
@@ -84,20 +70,59 @@ gulp.task('js-vendor', function(){
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
-gulp.task('js-main', function(){
+gulp.task('js-app', function(){
     return gulp.src(
             [
-                './public/js/main.js'
+                './public/js/jquery.core.js', 
+                './public/js/jquery.app.js'   
             ]
         )
-        .pipe(gp_concat('main.min.js'))
+        .pipe(gp_concat('app.min.js'))
         .pipe(gulp.dest('./public/dist/js/'))
-        .pipe(gp_rename('main.min.js'))
+        .pipe(gp_rename('app.min.js'))
         .pipe(gp_uglify())
         .pipe(gulp.dest('./public/dist/js/'))
 });
 
-gulp.task('js', ['js-vendor', 'js-main'], function(){})
+gulp.task('js-page-dashboard', function(){
+    return gulp.src(
+            [
+                './public/plugins/flot-chart/jquery.flot.min.js', 
+                './public/plugins/flot-chart/jquery.flot.time.js',
+                './public/plugins/flot-chart/jquery.flot.tooltip.min.js',
+                './public/plugins/flot-chart/jquery.flot.resize.js',
+                './public/plugins/flot-chart/jquery.flot.pie.js',
+                './public/plugins/flot-chart/jquery.flot.crosshair.js',
+                './public/plugins/flot-chart/curvedLines.js',
+                './public/plugins/flot-chart/jquery.flot.axislabels.js',
+                './public/plugins/jquery-knob/excanvas.js',
+                './public/plugins/jquery-knob/jquery.knob.js',
+                './public/pages/jquery.dashboard.init.js'                   
+            ]
+        )
+        .pipe(gp_concat('dashboard.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('dashboard.min.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/pages/dashboard/js/'))
+});
+
+gulp.task('js', ['js-vendor', 'js-app', 'js-page-dashboard'], function(){})
+
+// gulp.task('js-main', function(){
+//     return gulp.src(
+//             [
+//                 './public/js/main.js'
+//             ]
+//         )
+//         .pipe(gp_concat('main.min.js'))
+//         .pipe(gulp.dest('./public/dist/js/'))
+//         .pipe(gp_rename('main.min.js'))
+//         .pipe(gp_uglify())
+//         .pipe(gulp.dest('./public/dist/js/'))
+// });
+
+// gulp.task('js', ['js-vendor', 'js-main'], function(){})
 
 gulp.task('prod', ['style', 'js'], function(){})
 gulp.task('default', ['style', 'js'], function(){})
