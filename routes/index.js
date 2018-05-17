@@ -20,7 +20,27 @@ router.get('/', (req, res) => {
     	topics: recentTopics
     }
 
-	res.render('index', config)
+    //no one logged in
+    if(req.vertexSession == null) {
+        res.render('index', config)
+        return  
+    }
+     
+    //no one logged in
+    if(req.vertexSession.user == null) {
+        res.render('index', config)
+        return  
+    }
+
+    //Someone logged in!
+    turbo.fetchOne('user', req.vertexSession.user.id)
+    .then(data => {
+        config['user'] = data
+        res.render('index', config)
+    })
+    .catch(err => {
+        res.render('index', config)
+    })
 })
 
 router.get('/rooms', (req, res) => {
