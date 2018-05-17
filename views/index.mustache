@@ -184,8 +184,12 @@
         <script type="text/javascript" src="{{cdn}}/dist/js/app.min.js"></script>
 
         <script type="text/javascript">
-            (function(){
-                console.log('TEST')
+            (function(){               
+                $('#btn-login').click(function(){
+                    event.preventDefault()
+                    console.log('TEST')
+                })
+                
             })()
         </script>
 
