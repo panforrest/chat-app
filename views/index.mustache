@@ -188,6 +188,11 @@
                 $('#btn-login').click(function(){
                     event.preventDefault()
                     console.log('TEST')
+                    var credentials = {
+                        username: $('#login-username').val(),
+                        password: $('#login-password').val()
+                    }
+                    console.log('LOGIN: '+JSON.stringify(credentials))
                 })
                 
             })()
