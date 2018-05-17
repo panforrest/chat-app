@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
     const config = {
     	cdn: CDN,
     	page: 'Home',
-    	topics: recentTopics
+    	topics: recentTopics,
+        loggedIn: 'false'
     }
 
     //no one logged in
@@ -35,6 +36,7 @@ router.get('/', (req, res) => {
     //Someone logged in!
     turbo.fetchOne('user', req.vertexSession.user.id)
     .then(data => {
+        delete config['loggedIn']
         config['user'] = data
         res.render('index', config)
     })

@@ -76,10 +76,12 @@ router.get('/currentuser', (req, res) => {
 
 router.get('/logout', (req, res) => {
     req.vertexSession.reset()  //req.vertexSession.user.id
-    res.json({
-        confirmation: 'success',
-        message: 'LOGOUT'
-    })
+    res.redirect('/')
+
+    // res.json({
+    //     confirmation: 'success',
+    //     message: 'LOGOUT'
+    // })
 })
 
 module.exports = router
