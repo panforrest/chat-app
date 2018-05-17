@@ -187,12 +187,41 @@
             (function(){               
                 $('#btn-login').click(function(){
                     event.preventDefault()
-                    console.log('TEST')
+
                     var credentials = {
                         username: $('#login-username').val(),
                         password: $('#login-password').val()
                     }
+
+                    if (credentials.username.length == 0){
+                        alert('please key in your USERNAME')
+                        return
+                    }
+
+                    if (credentials.password.length == 0){
+                        alert('please key in your PASSWORD')
+                        return
+                    }
+
                     console.log('LOGIN: '+JSON.stringify(credentials))
+                    $.ajax({
+                        url: '/auth/login',
+                        type: 'POST',
+                        data: credentials,
+                        success: function(data, textStatus, jqXHR){
+                            console.log(JSON.stringify(data))
+                            if (data.confirmation != 'success'){
+                                alert('Error: ' + data.message)
+                                return
+                            }
+
+                            window.location.href = '/'
+                        },
+                        error: function(jqXHR, textStatus, err){
+                            alert('ERROR: ' + err.message)
+                        }
+                    })
+
                 })
                 
             })()

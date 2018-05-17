@@ -26,7 +26,7 @@ router.post('/login', function(req, res) {
     .then(data => {
         req.vertexSession.user = {id: data.id}
         res.json({
-            confirmation: '',
+            confirmation: 'success',
             data: data  //NOTE: NOT "user: user"
         })
     })
