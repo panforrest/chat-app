@@ -8,9 +8,16 @@ const CDN = (process.env.TURBO_ENV == 'dev') ? '' : process.env.TURBO_CDN
 	Data is rendered using the Mustache templating engine. For more
 	information, view here: https://mustache.github.io/#demo */
 router.get('/', (req, res) => {
+    const recentTopics = [
+    	{room:'politics', title:'Should I run 2020', profile:{username:'dtrump', image:''}, numReplies:4, date:'March 20, 2018'},
+    	{room:'sports', title:'We will win NBA title?', profile:{username:'lebron', image:''}, numReplies:14, date:'March 22, 2018'}
+    ]
+
+
     const config = {
     	cdn: CDN,
-    	page: 'Home'
+    	page: 'Home',
+    	topics: recentTopics
     }
 
 	res.render('index', config)

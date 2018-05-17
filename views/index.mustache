@@ -53,58 +53,59 @@
                                         <tr>
                                             <th>Room</th>
                                             <th>Posted By</th>
-                                            <th>Topic</th>
-                                            
-                                            <th>Replies</th>
-                                            
-                                            <th>Date</th>
-                                            
+                                            <th>Topic</th>                                            
+                                            <th>Replies</th>                                           
+                                            <th>Date</th>                                            
                                             <th class="hidden-sm">Action</th>
                                         </tr>
                                         </thead>
 
                                         <tbody>
-                                        <tr>
-                                            <td><b>Politics</b></td>
-                                            <td>
-                                                <a href="#">
-                                                    <img src="/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle" />
-                                                    <span class="ml-2">George A. Llanes</span>
-                                                </a>
-                                            </td>
+                                            {{#topics}}
+                                            <tr>
+                                                <td><b>{{room}}</b></td>
+                                                <td>
+                                                    <a href="#">
+                                                        <img src="/images/users/avatar-2.jpg" alt="contact-img" title="contact-img" class="rounded-circle" />
+                                                        <span class="ml-2">{{profile.username}}</span>
+                                                    </a>
+                                                </td>
 
-                                            <td>
-                                                <a style="color:red" href="#">Support for theme</a>
+                                                <td>
+                                                    <a style="color:red" href="#">{{title}}</a>
+                                                    
+                                                </td>
+
+                                               
+
+                                                <td>
+                                                    <span class="badge badge-warning">{{numReplies}}</span>
+                                                </td>
+
                                                 
-                                            </td>
 
-                                           
+                                                <td>
+                                                    {{date}}
+                                                </td>
 
-                                            <td>
-                                                <span class="badge badge-secondary">8</span>
-                                            </td>
+                                               
 
-                                            
-
-                                            <td>
-                                                2017/04/28
-                                            </td>
-
-                                           
-
-                                            <td>
-                                                <div class="btn-group dropdown">
-                                                    <a href="javascript: void(0);" class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i>Edit Ticket</a>
-                                                        <a class="dropdown-item" href="#"><i class="mdi mdi-check-all mr-2 text-muted font-18 vertical-middle"></i>Close</a>
-                                                        <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2 text-muted font-18 vertical-middle"></i>Remove</a>
-                                                        <a class="dropdown-item" href="#"><i class="mdi mdi-star mr-2 font-18 text-muted vertical-middle"></i>Mark as Unread</a>
+                                                <td>
+                                                    <div class="btn-group dropdown">
+                                                        <a href="javascript: void(0);" class="table-action-btn dropdown-toggle arrow-none btn btn-light btn-sm" data-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-horizontal"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="#"><i class="mdi mdi-pencil mr-2 text-muted font-18 vertical-middle"></i>Edit Ticket</a>
+                                                            <a class="dropdown-item" href="#"><i class="mdi mdi-check-all mr-2 text-muted font-18 vertical-middle"></i>Close</a>
+                                                            <a class="dropdown-item" href="#"><i class="mdi mdi-delete mr-2 text-muted font-18 vertical-middle"></i>Remove</a>
+                                                            <a class="dropdown-item" href="#"><i class="mdi mdi-star mr-2 font-18 text-muted vertical-middle"></i>Mark as Unread</a>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
 
+                                            {{/topics}}
+                                            
+<!-- 
                                         <tr>
                                             <td><b>Fashion</b></td>
                                             <td>
@@ -146,7 +147,7 @@
                                             </td>
                                         </tr>
 
-
+ -->
                                         </tbody>
                                     </table>
                                 </div>
