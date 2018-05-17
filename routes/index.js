@@ -9,7 +9,8 @@ const CDN = (process.env.TURBO_ENV == 'dev') ? '' : process.env.TURBO_CDN
 	information, view here: https://mustache.github.io/#demo */
 router.get('/', (req, res) => {
     const config = {
-    	cdn: CDN
+    	cdn: CDN,
+    	page: 'Home'
     }
 
 	res.render('index', config)
